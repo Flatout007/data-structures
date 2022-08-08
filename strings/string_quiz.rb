@@ -9,7 +9,7 @@
 :method => (toggle_case), :method => (display), class::method => (count_words),
 class::method => (validate)
 
-:property => {...characters}, :property => (length)
+:property => {...characters}, :property => {:length}
 */
 DOC
 

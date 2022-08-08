@@ -94,7 +94,7 @@ class ArrayADT
 
           @length+=1;
      end
-
+     
      def self.merge(arr_a, arr_b)
 
           output = ArrayADT.new;
@@ -125,8 +125,6 @@ class ArrayADT
 
                p1 += 1;
           end
-
-         
 
           output;
      end     
