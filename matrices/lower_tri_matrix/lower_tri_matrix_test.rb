@@ -53,7 +53,7 @@ puts "Test: #{$test_count += 1}";
 
 it ("should have a :length property that defaults to 0") do
     
-    m = D_Matrix.new();
+    m = Lower_tri.new;
     assert_count = 0;
 
     assert_count += 1 if assert? m.length === 0
