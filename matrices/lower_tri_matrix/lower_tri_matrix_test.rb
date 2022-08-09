@@ -1,6 +1,5 @@
-require_relative "diagonal_matrix_quiz.rb"
+require_relative "lower_tri_matrix.rb"
 require_relative "../../quotes.rb"
-
 
 def it brief, &block
 
@@ -30,25 +29,28 @@ end
 $test_count = 0;
 $count_correct = 0;
 
+# begin writing test cases here!
+
 
 print "\n"
 puts "Test: #{$test_count += 1}";
 
-it ("should allocate a single dimension array :A that represents the diagonal matrix :D_Matrix into memory. `D_Matrix` must have a :length and :A (array) properties.")  do 
-	m = D_Matrix.new();
-	assert_count = 0;
-    
-	assert_count += 1 if assert? m.A.instance_of?(Array) && !(m.A[0].instance_of?(Hash) && !(m.A[0].instance_of?(Array);
+it ("should set a single dimension array :A as a property to represent the two dimensional matrix :Lower_Tri into memory") do
 
-    ));       
-	
-	$count_correct += 1 if assert_count === 1;        
+    lower_tri = Lower_Tri.new;
+    assert_count = 0;
+
+    if assert? lower_tri.A.instance_of?(Array) && !(lower_tri.A[0].instance_of?(Hash)) && !(lower_tri.A[0].instance_of?(Array))
+        assert_count += 1;
+    end
+
+    $count_correct += 1 if assert_count === 1;
 end
 
 print "\n"
 puts "Test: #{$test_count += 1}";
 
-it ("should have a length property that defaults to 0") do
+it ("should have a :length property that defaults to 0") do
     
     m = D_Matrix.new();
     assert_count = 0;
@@ -57,64 +59,63 @@ it ("should have a length property that defaults to 0") do
 
     $count_correct += 1 if assert_count === 1;
 end
-    
 
 print "\n"
 puts "Test: #{$test_count += 1}";
 
-it ("#set(i, j, val) should set a non zero integer in D_Matrix if and only if location {i,j} is apart of the main diagonal of a 4x4 matrix.") do
-    
-    assert_count = 0;
-    m = D_Matrix.new(4);
-    count = 0;
-    i=2; 
-    j=2;
+it ("should have a #:set(i, j, value) method that sets a non 0 value based on the user given position (i.e non 0 indexed)") do
 
-    m.set(i, j, 100);
-    
-    assert_count += 1 if assert? m[i-1] == 100;
-    
+    assert_count = 0;
+    lower_tri = Lower_Tri.new 
+    i = 2-1, j = 1-1;
+    lower_tri.set(i, j, 100);
+    formula = i * (i-1) / 2 + j-1;
+
+    assert_count += 1 if lower_tri.A[formula] === 100;
+
     $count_correct += 1 if assert_count === 1;
 end
 
 print "\n"
 puts "Test: #{$test_count += 1}";
 
-it ("#get(i, j) should return a non zero value if and only if location {i,j} is apart of the main diagonal of a 4x4 matrix. Should return 0 or nil otherwise") do
+it ("should have a #:get(i, j) method that returns the value based on the user given position (i.e non 0 indexed)") do
 
-    m = D_Matrix.new(4);
-    assert_count = 0;
-    
-    m.set(1,1,1000);
-    m.set(2,2, 9000);
-    m.set(3,3, 8000);
-    m.set(4,4, 7000)
-    
-   if assert? m.get(1,1) === 1000 && m.get(2,2) === 9000 && m.get(3,3) === 8000 && m.get(4,4) === 7000 && 
-      (m.get(1,3) === 0 || m.get(1,3) === nil)
+    assert_count += 1;
+    lower_tri = Lower_Tri.new;
+    i = 2-1, j = 1-1;
+    lower_tri.set(i, j, 1000);
 
-      assert_count += 1;
-   end
+    assert_count += 1 if lower_tri.get(2, 1) === 1000; 
 
-   $count_correct += 1 if assert_count === 1;
+    $count_correct += 1 if assert_count === 1;
 end
 
 print "\n"
 puts "Test: #{$test_count += 1}";
 
-it ("#display should return a line breaking string reprensentation of a 4X4 diagonal matrix") do
+it ("should have a #:display() method that returns a line breaking string representation of :Lower_Tri with line breaks after each row") do
 
-    m = D_Matrix.new(4);
     assert_count = 0;
+    arr = [1,2,2,3,2,3,2,3,3,4];
+    lower_tri = Lower_Tri.new(4);
+    k = 0;
+    
+    str = "1000\n2200\n3230\n2334\n";
 
-    m.set(1,1,1);
-    m.set(2,2,2);
-    m.set(3,3,3);
-    m.set(4,4,4);
+    until i === 4 * (4-1) / 2
 
-    str = m.display();
+        if (i < j)
+            lower_tri.set(i, j, 0);
+        else
+            lower_tri.set(i, j, arr[k])
+            k+=1;
+        end
 
-    assert_count += 1 if assert? str === "1000\n0200\n0030\n0004\n" || str === "1000\n0200\n0030\n0004";
+        i+=1;
+    end
+
+    assert_count += 1 if str === lower_tri.display;
 
     $count_correct += 1 if assert_count === 1;
 end
@@ -136,39 +137,3 @@ else
 end
 
 print "\n";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
