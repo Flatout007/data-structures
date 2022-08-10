@@ -27,7 +27,6 @@ def assert? success
 end
 
 $test_count = 0;
-
 $count_correct = 0;
 
 # begin writing test cases here!
